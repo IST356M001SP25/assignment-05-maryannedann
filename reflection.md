@@ -1,7 +1,7 @@
 # Reflection
 
-Student Name:  name
-Sudent Email:  email
+Student Name:  Mary Daniel
+Sudent Email:  mcdaniel@syr.edu
 
 ## Instructions
 
@@ -22,4 +22,8 @@ Examples:
 **Best Reflection** "I learned when to use while vs for loops. While loops are for sentiel-controlled values (waiting for a condition to occur), vs for loops are for iterating over collections of fixed values."
 
 `--- Reflection Below This Line ---`
+
+This assignment taught me how to clean and manipulate data in Python, especially with date formats and string handling. I learned to use the datetime library to extract years from different date formats, but I struggled with string manipulation for country names. I made an error by incorrectly referencing a variable, which led to an UnboundLocalError. Once I fixed that, the code worked fine.
+
+I also had issues merging data correctly, but I resolved it by ensuring both dataframes had matching columns. Going forward, I want to practice working with dates and handling missing or inconsistent data, as that will help prevent errors in the future.
 

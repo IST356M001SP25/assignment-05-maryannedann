@@ -4,14 +4,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 def upload_file(file_name, bucket_name, object_name=None):
-    """Upload a file to an S3 bucket
-
-    :param file_name: Is a full path to the file to upload e.g. cache/file.csv 
-    :param bucket: Bucket to upload to. this should be ist356yournetid
-    :param object_name: S3 object name. this should be the file name without the cache/ prefix file.csv
-    :return: True if file was uploaded, else False
-    """
-    # create resource
+    """Upload a file to an S3 bucket"""
     s3 = boto3.resource('s3', 
         endpoint_url='https://play.min.io:9000',
         aws_access_key_id='Q3AM3UQ867SPQQA43P2F',
@@ -27,18 +20,25 @@ def upload_file(file_name, bucket_name, object_name=None):
     if bucket_name not in buckets:
         s3.create_bucket(Bucket=bucket_name)   
 
-    # If S3 object_name was not specified, use file_name
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    # Upload the file
     try:
         response = s3.upload_file(file_name, bucket_name, object_name)
     except ClientError as e:
-        print("ERROR",e)
+        print("ERROR", e)
         return False
     return True
 
 if __name__ == '__main__':
-    #TODO: Write your load code here (remove pass first)
-    pass
+    # 👇 Replace with your NetID
+    bucket = 'ist356447352240'  # e.g. 'ist356mdaniel'
+    
+    # 👇 Local file to upload
+    file_path = 'cache/survey.csv'  # or any file you want to upload
+    object_name = os.path.basename(file_path)  # 'survey.csv'
+
+    if upload_file(file_path, bucket, object_name):
+        print(f"✅ Uploaded {file_path} to {bucket}/{object_name}")
+    else:
+        print(f"❌ Failed to upload {file_path}")

@@ -1,31 +1,42 @@
 from datetime import datetime
 
 def clean_currency(item: str) -> float:
-    '''
-    remove anything from the item that prevents it from being converted to a float
-    '''    
-    return 
+    """
+    Cleans a currency string like "$120,000.00" or "USD 45,500" into a float 120000.0 or 45500.0.
+    """
+    if not item:
+        return None
+
+    allowed_chars = "0123456789."
+    result = ""
+
+    for char in item:
+        if char in allowed_chars:
+            result += char
+
+    try:
+        return float(result)
+    except:
+        return None
 
 def extract_year_mdy(timestamp):
-    '''
-    use the datatime.strptime to parse the date and then extract the year
-    '''
-    return 
+    """
+    Extracts the year from a timestamp in MM/DD/YYYY format.
+    Returns the year as an integer, or None if the format is invalid.
+    """
+    try:
+        dt = datetime.strptime(timestamp, '%m/%d/%Y %H:%M:%S')
+        return dt.year
+    except ValueError:
+        return None
 
-def clean_country_usa(item: str) ->str:
-    '''
-    This function should replace any combination of 'United States of America', USA' etc.
-    with 'United States'
-    '''
-    possibilities = [
-        'united states of america', 'usa', 'us', 'united states', 'u.s.'
-    ]
-    return
+def clean_country_usa(item: str) -> str:
+    if not isinstance(item, str):
+        return item  # Return as-is if not a string
 
-
-if __name__=='__main__':
-    print("""
-        Add code here if you need to test your functions
-        comment out the code below this like before sumbitting
-        to improve your code similarity score.""")
-
+    country = item.strip().lower()
+    if country in ['usa', 'us', 'u.s.', 'united states of america']:
+        return 'United States'
+    if country == 'united states':
+        return 'United States'
+    return item.title()              
